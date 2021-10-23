@@ -6,7 +6,7 @@ app.use(express.json());
 const cookieParser = require('cookie-parser')
 app.use(cookieParser());
 
-app.listen('5000', function () {
+app.listen(process.env.PORT||8081, function () {
     console.log('server listening on port 5000');
 });
 

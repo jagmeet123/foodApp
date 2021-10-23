@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { db_link } = require('../secrets');
+const { db_link } =process.env || require('../secrets');
 const validator = require("email-validator");
 mongoose.connect(db_link).then(() => {
     console.log('db connected');
