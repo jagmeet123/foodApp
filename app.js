@@ -15,7 +15,11 @@ const authRouter = require('./Routers/authRouter');
 const planRouter = require('./Routers/planRouter');
 const reviewRouter = require('./Routers/reviewRouter')
 const bookingRouter = require('./Routers/bookingRouter')
-
+app.route('/').get(function(req,res){
+    res.json({
+        message:"hello"
+    })
+})
 app.use('/auth', authRouter);
 app.use('/user', userRouter);
 app.use('/plan', planRouter)
