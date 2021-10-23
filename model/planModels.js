@@ -1,5 +1,11 @@
 const mongoose = require('mongoose');
-const { db_link } = process.env
+let db_link; 
+
+if(process.env.db_link){
+    db_link = process.env.db_link;
+}else{
+    db_link = require('../secrets').db_link
+}
 
 mongoose.connect(db_link).then(() => {
     console.log('plan Model database connected');

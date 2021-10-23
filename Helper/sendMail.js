@@ -1,4 +1,10 @@
 const nodemailer = require('nodemailer');
+let APP_PASSWORD;
+if(process.env.APP_PASSWORD){
+  APP_PASSWORD = process.env.APP_PASSWORD
+}else{
+  APP_PASSWORD = require('../secrets').APP_PASSWORD
+}
 
 module.exports = async function sendMail(userObj) {
   console.log('userObj',userObj);
@@ -8,7 +14,7 @@ module.exports = async function sendMail(userObj) {
     secure: false, // true for 465, false for other ports
     auth: {
       user: 'rihaanaggarwal89.st@gmail.com', // generated ethereal user
-      pass: 'cajgmeuhqkoicjua', // generated ethereal password
+      pass: APP_PASSWORD, // generated ethereal password
     },
   });
 

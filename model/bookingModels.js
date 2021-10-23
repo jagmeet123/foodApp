@@ -1,5 +1,10 @@
 const mongoose = require("mongoose");
-let { db_link } = process.env ;
+let db_link; 
+if(process.env.db_link){
+    db_link = process.env.db_link;
+}else{
+    db_link = require('../secrets').db_link
+}
 console.log('db_link',db_link)
 mongoose.connect(db_link).then(function (db) {
     console.log("connected to db")

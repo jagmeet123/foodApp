@@ -1,7 +1,11 @@
-
-const {JWT_KEY} = process.env 
+let JWT_KEY;
+if(process.env.JWT_KEY){
+    JWT_KEY = process.env.JWT_KEY
+}else{
+    JWT_KEY = require('../secrets').JWT_KEY
+}
 const jwt = require('jsonwebtoken');
-const userModel =require('../model/userModels')
+const userModel =require('../model/userModels');
 
 module.exports.ProtectRoute= function ProtectRoute(req,res,next){
 
