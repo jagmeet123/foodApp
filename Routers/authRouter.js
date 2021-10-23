@@ -6,7 +6,7 @@ const path = require('path')
 
 // ---------------------JWT-------------------------
 const jwt = require('jsonwebtoken')
-const { JWT_KEY } = process.env || require('../secrets');
+const { JWT_KEY } =   process.env;
 
 // ---------------------routes----------------------
 authRouter

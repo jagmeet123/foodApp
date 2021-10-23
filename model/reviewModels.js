@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const {db_link} =process.env || require('../secrets')
+const {db_link} =process.env 
 const planModel =require('../model/planModels')
 const userModel =require('../model/userModels')
 
