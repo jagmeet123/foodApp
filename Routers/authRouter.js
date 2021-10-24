@@ -1,4 +1,6 @@
 const express = require('express');
+const bcrypt = require('bcrypt')
+
 const authRouter = express.Router();
 const userModel = require('../model/userModels');
 const sendMail = require('../Helper/sendMail')
@@ -70,7 +72,8 @@ async function loginUser(req, res) {
             let user = await userModel.findOne({ email: req.body.email })
 
             if (user) {
-                if (req.body.password == user.password) {
+                let areEqual = await bcrypt.compare(req.body.password,user.password)
+                if (areEqual) {
                     // If we login the send the cookies to frontend
                     let payload = user['_id']
                     let token = jwt.sign({ id: payload }, JWT_KEY)

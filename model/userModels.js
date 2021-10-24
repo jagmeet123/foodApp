@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt')
+
 let db_link;
 
 if(process.env.db_link){
@@ -65,13 +67,16 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-userSchema.pre('save', function (next) {
+userSchema.pre('save', async function (next) {
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password,salt)
     this.confirmPassword = undefined;
     next()
 });
 
-userSchema.methods.resetHandler = function(password,confirmPassword){
-    this.password = password,
+userSchema.methods.resetHandler = async function(password,confirmPassword){
+    const salt = await bcrypt.genSalt(10)
+    this.password = await bcrypt.hash(this.password,salt);
     this.confirmPassword=confirmPassword,
     this.token=undefined
 }
